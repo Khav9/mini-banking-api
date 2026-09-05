@@ -2,6 +2,7 @@ package khav.learning.core_backing_api.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ public class Customer {
 
     private String email;
 
+    @CreationTimestamp
     @Column(name = "created_at")
     private LocalDate createdAt;
 
