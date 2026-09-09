@@ -2,6 +2,7 @@ package khav.learning.core_backing_api.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -15,10 +16,13 @@ public class Account {
     @Column(name = "account_id")
     private Long id;
 
-    @Column(name = "account_number")
-    private UUID accountNumber;
+    private String accountName;
 
-    private BigDecimal  balance;
+    @Column(name = "account_number", unique = true, nullable = false, length = 6)
+    private String accountNumber;
+
+    @ColumnDefault("0")
+    private BigDecimal  balance =  BigDecimal.ZERO;
 
     private String  currency;
 
