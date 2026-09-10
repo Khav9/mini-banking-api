@@ -1,9 +1,9 @@
 package khav.learning.core_backing_api.Entities;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.UUID;
 

@@ -1,6 +1,5 @@
 package khav.learning.core_backing_api.Services.Impls;
 
-import jakarta.transaction.Transactional;
 import khav.learning.core_backing_api.Dtos.AccountDto;
 import khav.learning.core_backing_api.Entities.Account;
 import khav.learning.core_backing_api.Entities.Customer;
@@ -10,6 +9,7 @@ import khav.learning.core_backing_api.Services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;

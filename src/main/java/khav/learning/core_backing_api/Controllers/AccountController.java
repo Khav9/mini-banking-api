@@ -1,6 +1,5 @@
 package khav.learning.core_backing_api.Controllers;
 
-import jakarta.validation.Valid;
 import khav.learning.core_backing_api.Dtos.AccountDto;
 import khav.learning.core_backing_api.Entities.Account;
 import khav.learning.core_backing_api.Mappers.AccountMapper;
@@ -21,7 +20,7 @@ public class AccountController {
     private final AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto) {
+    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         Account account = accountMapper.toAccount(accountDto);
 
         account = accountService.createAccount(account);

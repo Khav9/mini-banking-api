@@ -1,9 +1,9 @@
 package khav.learning.core_backing_api.Entities;
 
-import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data

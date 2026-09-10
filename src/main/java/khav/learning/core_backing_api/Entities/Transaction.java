@@ -1,9 +1,10 @@
 package khav.learning.core_backing_api.Entities;
 
-import jakarta.persistence.*;
 import khav.learning.core_backing_api.Enum.TransactionType;
 import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.*;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
