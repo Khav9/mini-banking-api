@@ -55,6 +55,11 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.deleteById(Id);
     }
 
+    @Override
+    public Account getAccount(Long id) {
+        return accountRepository.getOne(id);
+    }
+
     // Method to generate unique 6-digit account number
     private String generateUniqueAccountNumber() {
         String accountNumber;

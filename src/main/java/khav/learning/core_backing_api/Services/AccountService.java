@@ -8,4 +8,6 @@ public interface AccountService {
     Account createAccount(Account account);
     List<Account> findAll(Long id);
     void deleteAccount(Long Id);
+
+    Account getAccount(Long id);
 }

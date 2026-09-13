@@ -1,6 +1,10 @@
 package khav.learning.core_backing_api.Entities;
 
 import khav.learning.core_backing_api.Enum.TransactionType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -9,6 +13,10 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "transactions")
 public class Transaction {
     @Id
@@ -20,6 +28,8 @@ public class Transaction {
 
     @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal amount;
+
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
