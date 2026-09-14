@@ -1,6 +1,7 @@
 package khav.learning.core_backing_api.Controllers;
 
 import khav.learning.core_backing_api.Dtos.AccountDto;
+import khav.learning.core_backing_api.Dtos.response.AccountDetailDto;
 import khav.learning.core_backing_api.Entities.Account;
 import khav.learning.core_backing_api.Mappers.AccountMapper;
 import khav.learning.core_backing_api.Services.AccountService;
@@ -26,6 +27,20 @@ public class AccountController {
         account = accountService.createAccount(account);
 
         return ResponseEntity.ok(accountMapper.toAccountDto(account));
+    }
+
+    @GetMapping("{Id}")
+    public ResponseEntity<?> getAccount(@PathVariable Long Id) {
+        Account account = accountService.getAccount(Id);
+
+        AccountDetailDto  accountDetailDto = new AccountDetailDto();
+
+        accountDetailDto.setAccountName(account.getAccountName());
+        accountDetailDto.setBalance(account.getBalance());
+        accountDetailDto.setCurrency(account.getCurrency());
+        accountDetailDto.setCustomerId(account.getCustomer().getId());
+
+        return ResponseEntity.ok(accountDetailDto);
     }
 
     @DeleteMapping("{Id}")
