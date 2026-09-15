@@ -1,18 +1,17 @@
 package khav.learning.core_backing_api.Services.Impls;
 
-import khav.learning.core_backing_api.Dtos.AccountDto;
 import khav.learning.core_backing_api.Entities.Account;
 import khav.learning.core_backing_api.Entities.Customer;
 import khav.learning.core_backing_api.Repositories.AccountRepository;
 import khav.learning.core_backing_api.Repositories.CustomerRepository;
 import khav.learning.core_backing_api.Services.AccountService;
+import khav.learning.core_backing_api.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,7 +56,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getAccount(Long id) {
-        return accountRepository.getOne(id);
+        return accountRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Account", id));
     }
 
     // Method to generate unique 6-digit account number

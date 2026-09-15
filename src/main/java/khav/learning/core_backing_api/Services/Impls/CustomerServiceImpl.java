@@ -1,9 +1,9 @@
 package khav.learning.core_backing_api.Services.Impls;
 
-import khav.learning.core_backing_api.Entities.Account;
 import khav.learning.core_backing_api.Entities.Customer;
 import khav.learning.core_backing_api.Repositories.CustomerRepository;
 import khav.learning.core_backing_api.Services.CustomerService;
+import khav.learning.core_backing_api.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer getCustomerById(Long id) {
-        return customerRepository.findById(id).get();
+
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer", id));
     }
 
     @Override
