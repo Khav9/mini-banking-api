@@ -8,6 +8,7 @@ import khav.learning.core_backing_api.Services.AccountService;
 import khav.learning.core_backing_api.Services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,6 +22,7 @@ public class TransactionController {
     private final TransactionMapper transactionMapper;
     private final AccountService accountService;
 
+    @PreAuthorize("hasAuthority('transaction:write')")
     @PostMapping("{id}/deposit")
     public ResponseEntity<TransactionDto> deposit(@PathVariable("id") Long account_id, @RequestBody TransactionDto  transactionDto) {
         Transaction transaction = transactionMapper.toTransaction(transactionDto);
@@ -35,6 +37,7 @@ public class TransactionController {
                 .body(transactionMapper.toTransactionDto(tx));
     }
 
+    @PreAuthorize("hasAuthority('transaction:write')")
     @PostMapping("{id}/withdraw")
     public ResponseEntity<TransactionDto> withdraw(@PathVariable("id") Long account_id, @RequestBody TransactionDto  transactionDto) {
         Transaction transaction = transactionMapper.toTransaction(transactionDto);

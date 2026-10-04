@@ -7,6 +7,7 @@ import khav.learning.core_backing_api.Mappers.AccountMapper;
 import khav.learning.core_backing_api.Services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class AccountController {
     private final AccountMapper accountMapper;
     private final AccountService accountService;
 
+    @PreAuthorize("hasAuthority('account:write')")
     @PostMapping
     public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto) {
         Account account = accountMapper.toAccount(accountDto);
@@ -29,6 +31,7 @@ public class AccountController {
         return ResponseEntity.ok(accountMapper.toAccountDto(account));
     }
 
+    @PreAuthorize("hasAuthority('account:read')")
     @GetMapping("{Id}")
     public ResponseEntity<?> getAccount(@PathVariable Long Id) {
         Account account = accountService.getAccount(Id);

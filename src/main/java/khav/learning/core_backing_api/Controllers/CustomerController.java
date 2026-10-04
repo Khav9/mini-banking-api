@@ -10,6 +10,7 @@ import khav.learning.core_backing_api.Services.AccountService;
 import khav.learning.core_backing_api.Services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class CustomerController {
     private final AccountService  accountService;
     private final AccountMapper accountMapper;
 
+    @PreAuthorize("hasAuthority('customer:write')")
     @PostMapping
     public ResponseEntity<CustomerDto> create(@RequestBody CustomerDto customerDto) {
         Customer customer = customerMapper.toCustomer(customerDto);
@@ -34,12 +36,14 @@ public class CustomerController {
         return ResponseEntity.ok(customerMapper.toCustomerDto(customer));
     }
 
+    @PreAuthorize("hasAuthority('customer:read')")
     @GetMapping("{id}")
     public ResponseEntity<CustomerDto> getAllCustomers(@PathVariable Long id) {
         Customer customer = customerService.getCustomerById(id);
         return ResponseEntity.ok(customerMapper.toCustomerDto(customer));
     }
 
+    @PreAuthorize("hasAuthority('customer:read')")
     @PutMapping("{id}")
     public ResponseEntity<CustomerDto> update(@PathVariable("id") Long customerId, @RequestBody CustomerDto customerDto) {
         Customer customer = customerMapper.toCustomer(customerDto);
@@ -48,6 +52,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerMapper.toCustomerDto(customerUpdated));
     }
 
+    @PreAuthorize("hasAuthority('customer:read')")
     @GetMapping("{id}/accounts")
     public ResponseEntity<List<AccountDto>> getAccountsByCustomer(@PathVariable Long id) {
         Customer customer = customerService.getCustomerById(id);
